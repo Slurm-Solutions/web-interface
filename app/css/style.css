@@ -1,0 +1,25 @@
+body {
+    min-height: 100vh;
+    min-width: 800px;
+    margin: 0px;
+    background: #f8f8fa;
+    color: #1e1e26;
+}
+
+:-webkit-full-screen, {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+:-moz-full-screen {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+:full-screen {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}

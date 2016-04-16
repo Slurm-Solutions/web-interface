@@ -1,0 +1,39 @@
+.colMask {
+    position: relative;
+    clear: both;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    background: #e5e6eb;
+}
+
+.colRight {
+    background: white;
+    float: left;
+    width: 200%;
+    position: relative;
+    min-height: calc(100vh - 44px);
+    left: 250px;
+    border-left: 2px solid #d2d4dc;
+}
+
+.contentWrap {
+    float: right;
+    width: 50%;
+    position: relative;
+    right: 250px;
+}
+
+.content {
+    margin: 0 15px 0 265px;
+    position: relative;
+    right: 100%;
+    overflow: hidden;
+}
+
+.sidebar {
+    float: left;
+    width: 220px;
+    right: 235px;
+    position: relative;
+}

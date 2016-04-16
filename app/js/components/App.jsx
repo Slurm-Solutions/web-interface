@@ -1,17 +1,17 @@
 import React from 'react';
-import Footer from './Footer';
-import AddTodo from '../containers/AddTodo';
-import VisibleTodoList from '../containers/VisibleTodoList';
-
-import style from './App.css';
-import examplePic from '../../img/Example.png';
+import CurrentClientList from '../containers/CurrentClientList';
+import CurrentOrderList from '../containers/CurrentOrderList';
+import CurrentModalView from '../containers/CurrentModalView';
+import SingleSidebar from './SingleSidebar';
+import Header from './Header';
 
 const App = () => (
-    <div className={style.center}>
-        <img src={examplePic} />
-        <AddTodo />
-        <VisibleTodoList />
-        <Footer />
+    <div>
+        <Header />
+        <SingleSidebar sidebar={<CurrentClientList />}>
+            <CurrentOrderList />
+        </SingleSidebar>
+        <CurrentModalView />
     </div>
 );
 

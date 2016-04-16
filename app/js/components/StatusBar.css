@@ -1,0 +1,10 @@
+.bar {
+    background: #c0c2ce;
+    padding: 6px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.title {
+    font-weight: bold;
+}

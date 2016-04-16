@@ -1,4 +1,2 @@
-body {
-    background: url("../img/bg.png");
-    position: relative;
-}
+@import './reset.css';
+@import './style.css';

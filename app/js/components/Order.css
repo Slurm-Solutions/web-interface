@@ -1,0 +1,8 @@
+.panel {
+    margin: 25px 50px;
+    position: relative;
+    width: 80%;
+    left: 0;
+    right: 0;
+    float: left;
+}

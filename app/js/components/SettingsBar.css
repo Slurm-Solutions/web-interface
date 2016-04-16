@@ -1,0 +1,13 @@
+.menu {
+    float: right;
+    font-size: 25px;
+}
+
+.menu i {
+    margin: 0 25px;
+    cursor: pointer;
+}
+
+.menu i:hover {
+    color: #f37735;
+}

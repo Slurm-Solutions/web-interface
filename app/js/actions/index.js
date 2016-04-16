@@ -1,23 +1,15 @@
-let nextTodoId = 0;
+export * from './client'
+export * from './order'
 
-export const addTodo = (text) => {
+export const clearView = () => {
     return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        text
-    };
-};
+        type: 'CLEAR_VIEW'
+    }
+}
 
-export const setVisibilityFilter = (filter) => {
+export const updateFullscreen = (fullscreen) => {
     return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter
-    };
-};
-
-export const toggleTodo = (id) => {
-    return {
-        type: 'TOGGLE_TODO',
-        id
-    };
-};
+        type: 'UPDATE_FULLSCREEN',
+        fullscreen
+    }
+}

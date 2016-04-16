@@ -1,6 +1,8 @@
 # See style guide: https://github.com/airbnb/javascript
 extends: airbnb
-
+parserOptions:
+    ecmaFeatures:
+        experimentalObjectRestSpread: true
 # Override a couple of rules because no style guide is perfect.
 rules:
     comma-dangle: [error, never]

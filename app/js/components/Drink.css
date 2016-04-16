@@ -1,0 +1,15 @@
+.drink {
+    display: inline-block;
+    min-width: 70px;
+    max-width: 140px;
+    height: 50px;
+    text-align: center;
+    vertical-align: bottom;
+    padding: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: #00aedb;
+    border-bottom: 2px solid #007999;
+    border-right: 2px solid #007999;
+    border-radius: 2px;
+}
