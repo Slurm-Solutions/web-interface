@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Client = ({client, onClick}) => {
-    return (<li onClick={onClick}>{client.clientID}</li>);
+    return (<tr onClick={onClick}><td>{client.clientID}</td><td>{client.tableID}</td></tr>);
 };
 
 Client.propTypes = {

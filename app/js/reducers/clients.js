@@ -1,7 +1,7 @@
 const clients = (state=[], action) => {
     return [
-        {clientID: 'dudicus1'},
-        {clientID: 'bro4rce'}
+        {clientID: 'dudicus1', tableID: 1},
+        {clientID: 'bro4rce', tableID: 420}
     ];
 };
 

@@ -1,12 +1,22 @@
 import React, { PropTypes } from 'react';
 import Client from './Client'
+import style from './ClientList.css'
 
 const ClientList = ({ clients, onClientClick }) => {
-    return (<ul>{
+    return (
+    <div>
+      <table>
+      <tr>
+      <th>Client Name</th>
+      <th>Table #</th>
+      </tr>
+        {
         clients.map(client => (
             <Client key={client.clientID} client={client} onClick={() => onClientClick(client.clientID)} />
         ))
-    }</ul>)
+        }
+
+    </table></div>)
 };
 
 ClientList.propTypes = {
