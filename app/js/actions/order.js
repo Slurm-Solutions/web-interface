@@ -27,6 +27,13 @@ export const billOrder = (orderID) => {
     };
 };
 
+export const setOrderVerified = (orderID) => {
+    return {
+        type: "ORDER_VERIFIED",
+        orderID
+    };
+};
+
 export const setOrderPending = (orderID) => {
     return {
         type: "ORDER_PENDING",

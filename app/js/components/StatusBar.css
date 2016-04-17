@@ -8,3 +8,14 @@
 .title {
     font-weight: bold;
 }
+
+.ready {
+    float: right;
+    cursor: pointer;
+}
+
+.accepted {
+    float: right;
+    margin-right: 50px;
+    cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.green {
+    background-color: #00b159;
+    border-bottom-color: #006a35;
+    border-right-color: #006a35;
+}
+
+.orange {
+    background-color: #f37735;
+    border-bottom-color: #aa5325;
+    border-right-color: #aa5325;
+}
+
+.red {
+    background-color: #d11141;
+    border-bottom-color: #7d0a27;
+    border-right-color: #7d0a27;
+}

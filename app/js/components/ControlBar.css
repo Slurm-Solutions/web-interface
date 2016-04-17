@@ -2,18 +2,7 @@
     position: relative;
     width: 100%;
     bottom: 0;
-}
-
-.cancel {
-    position: relative;
-    float: left;
-    background: #d11141;
-    padding: 6px;
-    color: white;
-    width: 75px;
-    text-align: center;
-    border-bottom: 1px solid #7d0a27;
-    border-right: 1px solid #7d0a27;
+    margin-top: 1px;
 }
 
 .total {
@@ -21,16 +10,4 @@
     padding: 6px;
     font-weight: bold;
     text-align: right;
-}
-
-.bill {
-    position: relative;
-    float: right;
-    background: #00b159;
-    padding: 6px;
-    color: white;
-    width: 75px;
-    text-align: center;
-    border-bottom: 1px solid #006a35;
-    border-right: 1px solid #006a35;
 }

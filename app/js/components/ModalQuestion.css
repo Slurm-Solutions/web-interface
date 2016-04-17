@@ -1,0 +1,26 @@
+
+.modal {
+    background: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    top: 31px;
+    bottom: 34px;
+    right: 0px;
+    left: 10px;
+    position: absolute;
+    margin-left: -10px;
+}
+
+.modal h2 {
+    text-align: center;
+    color: black;
+    text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.responseBar {
+    width: 45%;
+    margin: 0 auto;
+}

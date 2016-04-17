@@ -23,3 +23,26 @@ body {
     height: 100%;
     overflow: auto;
 }
+
+input[type=checkbox] {
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+}
+
+button {
+    position: relative;
+    padding: 6px 12px;
+    color: white;
+    text-align: center;
+    border: none;
+    background: black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

@@ -6,6 +6,7 @@ import ControlBar from './ControlBar';
 import style from './Order.css'
 
 const Order = ({ order,
+                 verifyOrder,
                  acceptOrder,
                  unacceptOrder,
                  completeOrder,
@@ -21,9 +22,12 @@ const Order = ({ order,
             acceptOrder();
         fillDrink(drinkID);
     }
+    const alcohol = order.drinks.reduce((acc, val) => acc + val.alcoholic, 0);
+    const total = `\$${order.drinks.reduce((acc, val) => acc + val.price, 0).toFixed(2)}`;
 
     return (<div className={style.panel}>
         <StatusBar
+            title={order.orderID}
             status={order.status}
             showOrder={showOrder}
             acceptOrder={acceptOrder}
@@ -31,7 +35,14 @@ const Order = ({ order,
             completeOrder={completeOrder}
         />
         <DrinkList
+            verified={order.verified}
+            alcohol={alcohol}
+            goDelete={order.delete}
+            goBill={order.bill}
+            total={total}
             drinks={order.drinks}
+            verifyOrder={verifyOrder}
+            showOrder={showOrder}
             fillDrink={fillDrink_}
             emptyDrink={emptyDrink}
             showDrink={showDrink}
@@ -40,6 +51,7 @@ const Order = ({ order,
             billable={order.status == "completed"}
             cancelOrder={cancelOrder}
             billOrder={billOrder}
+            total={total}
         />
     </div>)
 };
