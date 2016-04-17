@@ -12,7 +12,10 @@ module.exports = extendConfig((config) => {
             })
         ],
         devServer: {
-            contentBase: 'build'
+            contentBase: 'build',
+            proxy: {
+                '/api/*': 'http://localhost:8080'
+            }
         }
     };
 }, true);
