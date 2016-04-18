@@ -15,13 +15,24 @@ const Order = ({ order,
                  cancelOrder,
                  showDrink,
                  fillDrink,
-                 emptyDrink }) => {
+                 emptyDrink,
+                 cancelCancel,
+                 confirmBill,
+                 confirmCancel }) => {
 
     const fillDrink_ = (drinkID) => {
         if(order.status == "pending")
             acceptOrder();
         fillDrink(drinkID);
+        if (order.drinks.length == 1 + order.drinks.reduce((a, v)=>a+(v.status == 'filled'), 0))
+            completeOrder();
     }
+    const emptyDrink_ = (drinkID) => {
+        if (order.status == "completed")
+            acceptOrder();
+        emptyDrink(drinkID);
+    }
+
     const alcohol = order.drinks.reduce((acc, val) => acc + val.alcoholic, 0);
     const total = `\$${order.drinks.reduce((acc, val) => acc + val.price, 0).toFixed(2)}`;
 
@@ -35,23 +46,25 @@ const Order = ({ order,
             completeOrder={completeOrder}
         />
         <DrinkList
-            verified={order.verified}
+            status={order.status}
+            confirm={order.confirm}
             alcohol={alcohol}
-            goDelete={order.delete}
-            goBill={order.bill}
             total={total}
             drinks={order.drinks}
             verifyOrder={verifyOrder}
             showOrder={showOrder}
+            cancelOrder={cancelOrder}
             fillDrink={fillDrink_}
-            emptyDrink={emptyDrink}
+            emptyDrink={emptyDrink_}
             showDrink={showDrink}
+            cancelCancel={cancelCancel}
+            billOrder={billOrder}
         />
         <ControlBar
             billable={order.status == "completed"}
-            cancelOrder={cancelOrder}
-            billOrder={billOrder}
             total={total}
+            confirmCancel={confirmCancel}
+            confirmBill={confirmBill}
         />
     </div>)
 };

@@ -13,6 +13,27 @@ export const modifyOrder = (orderID, changes) => {
     };
 };
 
+export const cancelCancel = (orderID) => {
+    return {
+        type: "CANCEL_CANCEL",
+        orderID
+    }
+}
+
+export const confirmCancel = (orderID) => {
+    return {
+        type: "CONFIRM_CANCEL",
+        orderID
+    }
+}
+
+export const confirmBill = (orderID) => {
+    return {
+        type: "CONFIRM_BILL",
+        orderID
+    }
+}
+
 export const cancelOrder = (orderID) => {
     return {
         type: "CANCEL_ORDER",

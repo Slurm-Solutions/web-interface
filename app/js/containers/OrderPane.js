@@ -5,6 +5,9 @@ import { setOrderVerified,
          setOrderAccepted,
          setOrderPending,
          setOrderCompleted,
+         cancelCancel,
+         confirmCancel,
+         confirmBill,
          billOrder,
          viewOrder,
          cancelOrder,
@@ -28,7 +31,10 @@ const mapDispatchToProps = (dispatch, { order }) => {
         cancelOrder: () => dispatch(cancelOrder(orderID)),
         showDrink: (drinkID) => dispatch(viewDrink(orderID, drinkID)),
         fillDrink: (drinkID) => dispatch(setDrinkFilled(orderID, drinkID)),
-        emptyDrink: (drinkID) => dispatch(setDrinkEmpty(orderID, drinkID))
+        emptyDrink: (drinkID) => dispatch(setDrinkEmpty(orderID, drinkID)),
+        confirmBill: () => dispatch(confirmBill(orderID)),
+        cancelCancel: () => dispatch(cancelCancel(orderID)),
+        confirmCancel: () => dispatch(confirmCancel(orderID)),
     };
 };
 

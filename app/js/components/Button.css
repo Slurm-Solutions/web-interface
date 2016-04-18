@@ -15,3 +15,16 @@
     border-bottom-color: #7d0a27;
     border-right-color: #7d0a27;
 }
+
+.yellow {
+    background-color: #ffc425;
+    border-bottom-color: #b28919;
+    border-right-color: #b28919;
+    color: inherit;
+}
+
+.blue {
+    background-color: #00aedb;
+    border-bottom-color: #006883;
+    border-right-color: #006883;
+}

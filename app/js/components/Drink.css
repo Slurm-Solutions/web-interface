@@ -1,31 +1,9 @@
 .item {
     display: inline-block;
+    min-width: 90px;
+    max-width: 170px;
+    padding: 10px;
+    margin-top: 5px;
 
-}
 
-.button {
-    min-width: 70px;
-    max-width: 140px;
-    height: 50px;
-    text-align: center;
-    vertical-align: bottom;
-    padding: 15px;
-    margin-right: 10px;
-    margin-top: 10px;
-    background: #00aedb;
-    border-bottom: 2px solid #007999;
-    border-right: 2px solid #007999;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.details {
-    margin: 1px 10px 10px 0;
-    cursor: pointer;
-    padding: 2px 0;
-    background: #ffc425;
-    border-bottom: 2px solid #b28919;
-    border-right: 2px solid #b28919;
-    border-radius: 2px;
-    text-align: center;
 }
