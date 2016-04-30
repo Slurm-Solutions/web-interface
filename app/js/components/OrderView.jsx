@@ -8,6 +8,7 @@ const OrderView = ({order}) => {
         {order.drinks.map((drink)=>(<li key={drink.drinkID}>{drink.name}</li>))}
         </ul>
         <h3>Price: {`\$${order.drinks.reduce((acc, val) => acc + val.price, 0).toFixed(2)}`}</h3>
+        [Editing the order is still under construction!]
     </div>);
 };
 

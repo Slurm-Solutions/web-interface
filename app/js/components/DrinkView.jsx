@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const DrinkView = ({orderID, drinkID}) => {
-    return (<div>{orderID} {drinkID}</div>);
+    return (<div>[Drink details are still under construction!]</div>);
 };
 
 export default DrinkView;
