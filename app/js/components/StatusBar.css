@@ -19,3 +19,8 @@
     margin-right: 50px;
     cursor: pointer;
 }
+
+.edit {
+    color: #f37735;
+    cursor: pointer;
+}

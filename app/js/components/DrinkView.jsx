@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
-const DrinkView = ({order, drink}) => {
-    return (<div>{order} {drink}</div>);
+const DrinkView = ({orderID, drinkID}) => {
+    return (<div>{orderID} {drinkID}</div>);
 };
 
 export default DrinkView;

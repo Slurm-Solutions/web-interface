@@ -18,7 +18,7 @@ const StatusBar = ({title, status, showOrder, acceptOrder, unacceptOrder, comple
 
     return (
     <div className={style.bar}>
-        <span className={style.title}>{title}</span>
+        <span className={style.title}>{title} <span className={style.edit} onClick={showOrder}>[edit]</span></span>
         <span className={style.ready}><label><input type="checkbox" {...readyEnabled} onClick={readyEnabled.checked? acceptOrder:completeOrder}/> Ready</label></span>
         <span className={style.accepted}><label><input type="checkbox" {...progressEnabled} onClick={progressEnabled.checked ? unacceptOrder:acceptOrder}/> In Progress</label></span>
     </div>)

@@ -1,5 +1,20 @@
-th, td {
-  border-bottom: 1px solid #ddd;
-  padding: 20px;
-  text-align: center;
+.clientTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.clientTable th, .clientTable td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 5px;
+}
+
+.clientTable th {
+    padding-top: 40px;
+    font-size: 17px;
+}
+.row:hover {
+    background: #ddd;
+    cursor: pointer;
 }

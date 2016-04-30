@@ -4,7 +4,8 @@ import {viewClient} from '../actions/client';
 
 const mapStateToProps = (state) => {
     return {
-        clients: state.clients
+        clients: state.clients,
+        timeouts: state.timeouts
     };
 };
 

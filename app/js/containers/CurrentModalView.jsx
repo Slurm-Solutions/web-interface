@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ModalView from '../components/ModalView'
 import ClientView from '../components/ClientView';
 import DrinkView from '../components/DrinkView';
-import OrderView from '../components/OrderView';
+import BoundOrderView from './BoundOrderView';
 import { clearView } from '../actions';
 
 
@@ -12,11 +12,11 @@ const ModalSelector = ({focus, clearFocus}) => {
         return (<ModalView clear={clearFocus} title={focus.title}>
         {(() => {switch(focus.type) {
             case 'client':
-                return <ClientView client={focus.clientID} />
+                return <ClientView clientID={focus.clientID} />
             case 'drink':
-                return <DrinkView order={focus.orderID} drink={focus.drinkID} />
+                return <DrinkView orderID={focus.orderID} drinkID={focus.drinkID} />
             case 'order':
-                return <OrderView order={focus.orderID} />
+                return <BoundOrderView orderID={focus.orderID} />
         }})()}
         </ModalView>)
     } else {
