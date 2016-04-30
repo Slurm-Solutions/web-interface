@@ -37,99 +37,141 @@ const reduceOrder = (state, action) => {
     }
 }
 
-let junk = (i) => ({
-        drinks: [
-            {
-                drinkID: 'foo',
-                name: 'fooo',
-                status: 'unfilled',
-                alcoholic: true,
-                price: 3.5
-            },
-            {
-                drinkID: 'foao',
-                name: 'fooo',
-                status: 'unfilled',
-                alcoholic: true,
-                price: 3.5
-            },
-            {
-                drinkID: 'fovo',
-                name: 'fooo',
-                status: 'unfilled',
-                alcoholic: true,
-                price: 3.5
-            },
-            {
-                drinkID: 'feoo',
-                name: 'fooo',
-                status: 'unfilled',
-                alcoholic: true,
-                price: 3.5
-            },
-            {
-                drinkID: 'bar',
-                name: 'barr',
-                status: 'unfilled',
-                alcoholic: true,
-                price: 3.5
-            },
-        ],
-        status: 'unverified',
-        confirm: '',
-        orderID: 'bazzle-dazzle' + i
-});
-
 let defaultOrders = [
     {
         drinks: [
             {
-                drinkID: 'foo',
-                name: 'fooo',
-                status: 'unfilled',
-                alcoholic: false,
-                price: 3.5
-            },
-            {
-                drinkID: 'bar',
-                name: 'This is a very long drink name.',
+                drinkID: '1',
+                name: 'Something in the Whey',
                 status: 'unfilled',
                 alcoholic: true,
-                price: 3.5
+                price: 5.98
+            },
+            {
+                drinkID: '2',
+                name: 'PBR',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 2.99
+            },
+            {
+                drinkID: '3',
+                name: 'Pespi',
+                status: 'unfilled',
+                alcoholic: false,
+                price: 1.99
             },
         ],
         status: 'unverified',
-        verified: true,
-        orderID: 'bazzle-dazzle'
+        confirm: '',
+        orderID: 'Perilous Pineapple'
     },
     {
         drinks: [
             {
-                drinkID: 'daf',
-                name: 'daff',
+                drinkID: '1',
+                name: 'Mountain Dew',
                 status: 'unfilled',
                 alcoholic: false,
-                price: 3.5
-            },
-            {
-                drinkID: 'zav',
-                name: 'zavv',
-                status: 'unfilled',
-                alcoholic: false,
-                price: 3.5
+                price: 1.99
             },
         ],
         status: 'pending',
         confirm: '',
-        orderID: 'sazzle-bazzle'
-    }
+        orderID: 'Intrepid Boombox'
+    },
+    {
+        drinks: [
+            {
+                drinkID: '1',
+                name: '"Loaded" Bloody Mary',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 6.99
+            },
+            {
+                drinkID: '2',
+                name: '"Loaded" Bloody Mary',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 6.99
+            },
+            {
+                drinkID: '3',
+                name: '"Loaded" Bloody Mary',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 6.99
+            }
+        ],
+        status: 'unverified',
+        confirm: '',
+        orderID: 'Elastic Orange'
+    },
+    {
+        drinks: [
+            {
+                drinkID: '1',
+                name: 'Pespi',
+                status: 'unfilled',
+                alcoholic: false,
+                price: 1.99
+            },
+            {
+                drinkID: '2',
+                name: 'Pespi',
+                status: 'unfilled',
+                alcoholic: false,
+                price: 1.99
+            },
+            {
+                drinkID: '3',
+                name: 'Coke',
+                status: 'unfilled',
+                alcoholic: false,
+                price: 1.99
+            },
+        ],
+        status: 'pending',
+        confirm: '',
+        orderID: 'Loud Pineapple'
+    },
+    {
+        drinks: [
+            {
+                drinkID: '1',
+                name: 'Something in the Whey',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 5.98
+            },
+            {
+                drinkID: '2',
+                name: 'PBR',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 2.99
+            },
+            {
+                drinkID: '3',
+                name: 'PBR',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 2.99
+            },
+            {
+                drinkID: '4',
+                name: 'PBR',
+                status: 'unfilled',
+                alcoholic: true,
+                price: 2.99
+            },
+        ],
+        status: 'unverified',
+        confirm: '',
+        orderID: 'Regrettable Panda'
+    },
 ]
-
-defaultOrders.push(junk(1));
-defaultOrders.push(junk(2));
-defaultOrders.push(junk(3));
-defaultOrders.push(junk(4));
-defaultOrders.push(junk(5));
 
 const orders = (state=defaultOrders, action) => {
     switch(action.type) {

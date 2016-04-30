@@ -6,8 +6,20 @@ var bodyParser = require('body-parser');
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('build'));
 
 var port = 8080;        // set our port
+
+var db;
+
+require('fs').readFile('./database.json', 'utf8', function (err, data) {
+    if (err) throw err; // we'll not consider error handling for now
+    db = JSON.parse(data);
+});
+
+function save_db() {
+    require('fs').writeFile('./database.json', JSON.stringify(db))
+}
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -23,40 +35,78 @@ router.route('/establishment')
 	.get (function(req, res){
 		res.json({
 			message: 'This should be a list of all registered establishments',
-			establishments: ['List of establishments']
-			});
+			establishments: Object.keys(db.establishments).map(function(key) {
+                return '/establishment/' + key;
+            })
+		});
 	})
-	
+
 	.post (function(req, res){
+        var name = req.body.name;
+        var email = req.body.email;
+        var password = req.body.password;
+        var card_at_door = req.body.card_at_door;
+        var id = db.establishment_inc++
+        db.establishments[id] = {
+            "name": name,
+            "email": email,
+            "password": password,
+            "card_at_door": "card_at_door",
+            "menu": [],
+            "banlist": [],
+            "tables": [],
+        }
+
+        save_db();
+
 		res.json({
 			message: 'This adds a new establishment',
-			establishment: 'establishmentID'
+			establishment: '/establisment/' + id
 			});
 	});
 
 router.route('/establishment/:establishmentID')
 
 	.get (function(req, res){
-		res.json({
-			message: 'Name of specific establisment and other details',
-			name: 'Awesome Bar & Club (AB&C)',
-			location: 'That one awesome place in the best city',
-			start_time: 'Now',
-			close_time: 'Never'
-			});
+        res.json(db.establishments[req.params.establishmentID]);
 	})
-	
+
 	.put (function(req, res){
-		res.json({
-			message: 'This establishment has been updated.',
-			});
+        var obj = Object.assign(db.establishments[req.params.establishmentID],
+                                req.body)
+        save_db();
+
+		res.json(obj);
 	})
-	
+
 	.delete (function(req, res){
+        delete db.establishments[req.params.establishmentID];
 		res.json({
 			message: 'This establishment has been removed.'
 			});
 	});
+
+router.route('/establishment/:establishmentID/tables')
+    .get(function(req, res) {
+        res.json({tables: db.establishments[req.params.establishmentID].tables})
+    })
+    .put(function(req, res) {
+        var tables = db.establishments[req.params.establishmentID].tables;
+        var add = req.body.add || [];
+        var rem = req.body.remove || [];
+
+        tables.push.apply(tables, add);
+        for (var i=0; i<rem.length; i++) {
+            r = rem[i];
+            var ind = tables.indexOf(r);
+            if(ind != -1) {
+            	tables.splice(ind, 1);
+            }
+        }
+        save_db();
+        res.json({tables: db.establishments[req.params.establishmentID].tables})
+
+    })
 
 router.route('/establishment/:establishmentID/banList')
 
@@ -66,7 +116,7 @@ router.route('/establishment/:establishmentID/banList')
 			banned: ['List of banned clients']
 			});
 	})
-	
+
 	.post (function(req, res){
 		res.json({
 			message: 'New client added to list',
@@ -85,14 +135,14 @@ router.route('/establishment/:establishmentID/banList/:eventID')
 			reason: 'Too drunk and obnoxious'
 			});
 	})
-	
+
 	.put (function(req, res){
 		res.json({
 			message: 'Ban event updated',
 			eventID: ':eventID'
 		});
 	})
-	
+
 	.delete (function(req, res){
 		res.json({
 			message: 'This ban has been removed.'
@@ -107,7 +157,7 @@ router.route('/establishment/:establishmentID/menu')
 			menu: ['List of menu items']
 			});
 	})
-	
+
 	.post (function(req, res){
 		res.json({
 			message: 'New menu item has been added',
@@ -118,7 +168,7 @@ router.route('/establishment/:establishmentID/menu')
 router.route('/establishment/:establishmentID/menu/:entry')
 
 	.get (function(req, res){
-		res.json({ 
+		res.json({
 			message: 'This is a drink',
 			drink: 'drink_name',
 			price: 99.99,
@@ -132,7 +182,7 @@ router.route('/establishment/:establishmentID/menu/:entry')
 			message: 'This drink has been updated.'
 		});
 	})
-	
+
 	.delete (function(req, res){
 		res.json({
 			message: 'This entry has been removed.'
@@ -144,7 +194,7 @@ router.route('/client')
 	.get (function(req, res){
 		res.json({ message: 'This is a list of all clients'})
 	})
-	
+
 	.post (function(req, res){
 		res.json({
 			message: 'New client added.',
@@ -178,13 +228,13 @@ router.route('/client/:clientID/orders/:orderID')
 			order: ['List of menu entries ordered']
 			});
 	})
-	
+
 	.put (function(req, res){
 		res.json({
 			message: 'This order has been updated.'
 			});
 	});
-	
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
