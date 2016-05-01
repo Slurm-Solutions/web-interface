@@ -1,0 +1,8 @@
+.content {
+    margin: 0 250px;
+    background: white;
+    min-height: calc(100vh - 64px);
+    padding: 10px 25px;
+    border-left: 2px solid #d2d4dc;
+    border-right: 2px solid #d2d4dc;
+}
