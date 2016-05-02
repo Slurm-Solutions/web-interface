@@ -218,11 +218,11 @@ router.route('/establishment/:establishmentID/menu/:entry')
 router.route('/establishment/:establishmentID/orders')
 	
 	.get (function(req, res){
-		var clientID = req.params.clientID;
+		var estabID = req.params.establishmentID;
 		res.json({
 			message: 'This should be a list of all registered menu items',
-			menu: Object.keys(db.establishments[clientID].orders).map(function(key) {
-	            return '/api/client/' + clientID + '/orders/' + key;
+			menu: Object.keys(db.establishments[estabID].orders).map(function(key) {
+	            return '/api/client/' + estabID + '/orders/' + key;
 	        })
 		});
 	})
@@ -269,7 +269,7 @@ router.route('/client')
 	.get (function(req, res){
 		res.json({
 			message: 'This should be a list of all registered clients',
-			menu: Object.keys(db.clients {
+			menu: Object.keys(db.clients).map(function(key) {
                 return '/api/client/' + key;
             })
 		});
@@ -281,24 +281,23 @@ router.route('/client')
         var password = req.body.password;
         var id = db.client_inc++
         db.clients[id] = {
-            "name": name,
+            "username": username,
             "email": email,
             "password": password,
-            "orders": {},
         }
 
         save_db();
 
 		res.json({
 			message: 'This adds a new client',
-			establishment: '/api/client/' + id
+			client: '/api/client/' + id
 			});
 	});
 
 router.route('/client/:clientID')
 
 	.get (function(req, res){
-        res.json(db.establishments[req.params.clientID]);
+        res.json(db.clients[req.params.clientID]);
 	})
 
 	.put (function(req, res){
