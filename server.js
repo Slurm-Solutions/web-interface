@@ -36,7 +36,7 @@ router.route('/establishment')
 		res.json({
 			message: 'This should be a list of all registered establishments',
 			establishments: Object.keys(db.establishments).map(function(key) {
-                return '/establishment/' + key;
+                return '/api/establishment/' + key;
             })
 		});
 	})
@@ -51,17 +51,18 @@ router.route('/establishment')
             "name": name,
             "email": email,
             "password": password,
-            "card_at_door": "card_at_door",
-            "menu": [],
-            "banlist": [],
-            "tables": [],
+            "card_at_door": card_at_door,
+            "menu": {},
+            "banlist": {},
+            "tables": {},
+            "orders": {},
         }
 
         save_db();
 
 		res.json({
 			message: 'This adds a new establishment',
-			establishment: '/establisment/' + id
+			establishment: '/api/establishment/' + id
 			});
 	});
 
@@ -72,8 +73,8 @@ router.route('/establishment/:establishmentID')
 	})
 
 	.put (function(req, res){
-        var obj = Object.assign(db.establishments[req.params.establishmentID],
-                                req.body)
+        var obj = Object.assign(db.establishments[req.params.establishmentID], req.body);
+        
         save_db();
 
 		res.json(obj);
@@ -113,37 +114,47 @@ router.route('/establishment/:establishmentID/banList')
 	.get (function(req, res){
 		res.json({
 			message: 'This is a list of all banned clients for this establishment',
-			banned: ['List of banned clients']
+			banned: Object.keys(db.establishments[req.params.establishmentID].banlist).map(function(key) {
+                return '/api/establishment/' + req.params.establishmentID + '/banList/' + key;
+            })
 			});
 	})
 
 	.post (function(req, res){
+		var clientID = req.body.client;
+		var start = req.body.start;
+		var duration = req.body.duration;
+		var reason = req.body.reason;
+		db.establishments[req.params.establishmentID].banlist[clientID] = {
+				"start": start,
+				"duration": duration,
+				"reason": reason
+		}
+		
+		save_db();
+		
 		res.json({
 			message: 'New client added to list',
-			banned: ':clientID'
+			banned: '/api/establishment/' + req.params.establishmentID + '/banList/' + clientID
 		});
 	});
 
 router.route('/establishment/:establishmentID/banList/:eventID')
 
 	.get (function(req, res){
-		res.json({
-			message: 'Details about a client ban',
-			client: 'clientID',
-			start: 'ISO 8601 timestamp',
-			end: 'ISO 8601 timestamp',
-			reason: 'Too drunk and obnoxious'
-			});
+		res.json(db.establishments[req.params.establishmentID].banlist[req.params.eventID]);
 	})
 
 	.put (function(req, res){
-		res.json({
-			message: 'Ban event updated',
-			eventID: ':eventID'
-		});
+		var obj = Object.assign(db.establishments[req.params.establishmentID].banlist[req.params.eventID], req.body);
+                
+		save_db();
+		
+		res.json(obj);
 	})
 
 	.delete (function(req, res){
+		delete db.establishments[req.params.establishmentID].banlist[req.params.eventID];
 		res.json({
 			message: 'This ban has been removed.'
 			});
@@ -152,86 +163,156 @@ router.route('/establishment/:establishmentID/banList/:eventID')
 router.route('/establishment/:establishmentID/menu')
 
 	.get (function(req, res){
+		var estabID = req.params.establishmentID;
 		res.json({
-			message: 'This is a list of all menu entries for this establishment',
-			menu: ['List of menu items']
-			});
+			message: 'This should be a list of all registered menu items',
+			menu: Object.keys(db.establishments[estabID].menu).map(function(key) {
+                return '/api/establishment/' + estabID + '/menu/' + key;
+            })
+		});
 	})
 
 	.post (function(req, res){
+		var estabID = req.params.establishmentID;
+		var name = req.body.name;
+        var price = req.body.price;
+        var description = req.body.description;
+        var image = req.body.image;
+        var age_restricted = req.body.age_restricted;
+        db.establishments[estabID].menu[name] = {
+            "price": price,
+            "description": description,
+            "image": image,
+            "age_rescrited": age_restricted
+        }
+
+        save_db();
+
 		res.json({
-			message: 'New menu item has been added',
-			enty: ':entry'
+			message: 'This adds a new menu item',
+			establishment: '/api/establishment/' + estabID + '/menu/' + name
 		});
 	});
 
 router.route('/establishment/:establishmentID/menu/:entry')
 
 	.get (function(req, res){
-		res.json({
-			message: 'This is a drink',
-			drink: 'drink_name',
-			price: 99.99,
-			description: 'Is a good drink.',
-			age_restricted: true
-			});
+		res.json(db.establishments[req.params.establishmentID].menu[req.params.entry])
 	})
 
 	.put (function(req, res){
-		res.json({
-			message: 'This drink has been updated.'
-		});
+		var obj = Object.assign(db.establishments[req.params.establishmentID].menu[req.params.entry], req.body);
+                
+		save_db();
+		
+		res.json(obj);
 	})
 
 	.delete (function(req, res){
+		delete db.establishments[req.params.establishmentID].menu[req.params.entry];
 		res.json({
 			message: 'This entry has been removed.'
+			});
+	});
+
+router.route('/establishment/:establishmentID/orders')
+	
+	.get (function(req, res){
+		var clientID = req.params.clientID;
+		res.json({
+			message: 'This should be a list of all registered menu items',
+			menu: Object.keys(db.establishments[clientID].orders).map(function(key) {
+	            return '/api/client/' + clientID + '/orders/' + key;
+	        })
+		});
+	})
+	
+	.post (function(req, res){
+		var estabID = req.params.establishmentID;
+		var name = req.body.name;
+	    var price = req.body.price;
+	    var description = req.body.description;
+	    var image = req.body.image;
+	    var age_restricted = req.body.age_restricted;
+	    db.establishments[estabID].menu[name] = {
+	        "price": price,
+	        "description": description,
+	        "image": image,
+	        "age_rescrited": age_restricted
+	    }
+	
+	    save_db();
+	
+		res.json({
+			message: 'This adds a new menu item',
+			establishment: '/api/establishment/' + estabID + '/menu/' + name
+		});
+	});
+	
+router.route('/establishment/:establishmentID/orders/:orderID')
+	
+	.get (function(req, res){
+		res.json({
+			message: 'This is an order by a client at an establishment.',
+			order: ['List of menu entries ordered']
+			});
+	})
+	
+	.put (function(req, res){
+		res.json({
+			message: 'This order has been updated.'
 			});
 	});
 
 router.route('/client')
 
 	.get (function(req, res){
-		res.json({ message: 'This is a list of all clients'})
+		res.json({
+			message: 'This should be a list of all registered clients',
+			menu: Object.keys(db.clients {
+                return '/api/client/' + key;
+            })
+		});
 	})
 
 	.post (function(req, res){
+		var username = req.body.username;
+        var email = req.body.email;
+        var password = req.body.password;
+        var id = db.client_inc++
+        db.clients[id] = {
+            "name": name,
+            "email": email,
+            "password": password,
+            "orders": {},
+        }
+
+        save_db();
+
 		res.json({
-			message: 'New client added.',
-			client: ':clientID'
+			message: 'This adds a new client',
+			establishment: '/api/client/' + id
 			});
 	});
 
 router.route('/client/:clientID')
 
 	.get (function(req, res){
-		res.json({
-			message: 'This is a specific client',
-			name: 'dudicus1'
-			})
-	});
-
-router.route('/client/:clientID/orders')
-
-	.get (function(req, res){
-		res.json({
-			message: 'This is a list of orders by a client.',
-			orders: ['List of orders']
-			});
-	});
-
-router.route('/client/:clientID/orders/:orderID')
-
-	.get (function(req, res){
-		res.json({
-			message: 'This is an order by a client.',
-			order: ['List of menu entries ordered']
-			});
+        res.json(db.establishments[req.params.clientID]);
 	})
 
 	.put (function(req, res){
+        var obj = Object.assign(db.clients[req.params.clientID], req.body);
+        
+        save_db();
+
+		res.json(obj);
+	})
+
+	.delete (function(req, res){
+        delete db.clients[req.params.clientID];
 		res.json({
-			message: 'This order has been updated.'
+			message: 'This client has been removed.'
 			});
 	});
 
