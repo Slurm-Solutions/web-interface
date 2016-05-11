@@ -35,7 +35,7 @@ const DrinkList = ({ drinks,
             modal = (<ModalQuestion
                         accept="Over 21"
                         onAccept={verifyOrder}
-                        cancel="Modify Order"
+                        cancel="Edit Order"
                         onCancel={showOrder}
                         severe={false}
                      >
